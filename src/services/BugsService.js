@@ -10,7 +10,6 @@ class BugsService {
   async getBugs() {
     const res = await api.get('/api/bugs')
     AppState.bugs = res.data
-    console.log(res.data)
   }
 
   async deleteBug(id) {

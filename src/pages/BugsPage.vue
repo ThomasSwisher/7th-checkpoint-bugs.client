@@ -35,7 +35,7 @@
         </div>
       </div>
       <tr class="custom" v-for="bug in state.bugs" :key="bug.id">
-        <router-link :to="{name: 'BugsPage', params: {id: bug.id}}">
+        <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
           <div class="row">
             <div class="col-3">
               {{ bug.title }}
@@ -44,7 +44,7 @@
               {{ bug.closed }}
             </div>
             <div class="col-3">
-              {{ bug.updatedAt }}
+              {{ new Date (bug.updatedAt).toLocaleString(en, time) }}
             </div>
             <div class="col-3">
               <button @click="deleteBug(bug.id)" class="btn custom-btn btn-danger delete">
@@ -96,7 +96,13 @@ export default {
         } catch (error) {
           console.error(error)
         }
+      },
+      time: {
+        year: '2-digit',
+        month: '2-digit',
+        day: '2-digit'
       }
+
     }
   }
 }

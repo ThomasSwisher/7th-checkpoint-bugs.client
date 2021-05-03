@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-light">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+    <router-link class="navbar-brand d-flex" :to="{ name: 'BugsPage' }">
       <div class="d-flex flex-column align-items-center">
         <img
           alt="logo"
@@ -33,7 +33,7 @@
           </router-link>
         </li>
       </ul>
-      <span class="navbar-text">
+      <span class="">
         <button
           class="btn btn-outline-primary text-uppercase"
           @click="login"
