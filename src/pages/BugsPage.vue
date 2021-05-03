@@ -1,60 +1,59 @@
 <template>
   <div class="container-fluid">
-    <div class="row form-group ml-3 mt-3">
-      <form @submit.prevent="createBug">
-        <!-- <div class="form-group cust-form">
-          <label for="title">Create Bug</label>
-          <input type="text"
-                 class="form-control"
-                 name="title"
-                 id="title"
-                 placeholder="Name Bug..."
-                 v-model="state.newBug.title"
-          >
-          <button class="btn btn-success" type="submit">
-            + Bug
-          </button>
-        </div> -->
-      </form>
-    </div>
-    <table>
+    <div class="bug container">
       <div class="row">
-        <div class="col-3">
-          <h3>Title</h3>
-        </div>
-        <div class="col-3">
-          <h3>Reported By</h3>
-        </div>
-        <div class="col-3">
-          <h3>
-            Status
-          </h3>
-        </div>
-        <div class="col-3">
-          <h3>Last Modified</h3>
+        <div class="col d-flex justify-content-end py-3">
+          <button title="Open Create Bug Form"
+                  type="button"
+                  class=""
+                  data-toggle="modal"
+                  data-target="#new-bug-form"
+          >
+            <h4>REPORT</h4>
+          </button>
         </div>
       </div>
-      <tr class="custom" v-for="bug in state.bugs" :key="bug.id">
-        <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
-          <div class="row">
-            <div class="col-3">
-              {{ bug.title }}
-            </div>
-            <div class="col-3">
-              {{ bug.closed }}
-            </div>
-            <div class="col-3">
-              {{ new Date (bug.updatedAt).toLocaleString(en, time) }}
-            </div>
-            <div class="col-3">
-              <button @click="deleteBug(bug.id)" class="btn custom-btn btn-danger delete">
-                Delete
-              </button>
-            </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <h3>Title</h3>
+      </div>
+      <div class="col-3">
+        <h3>Reported By</h3>
+      </div>
+      <div class="col-3">
+        <h3>
+          Status
+        </h3>
+      </div>
+      <div class="col-3">
+        <h3>Last Modified</h3>
+      </div>
+    </div>
+    <div class="color" v-for="bug in state.bugs" :key="bug.id">
+      <div :to="{name: 'BugDetails', params: {id: bug.id}}">
+        <div class="row">
+          <div class="col-3">
+            {{ bug.title }}
           </div>
-        </router-link>
-      </tr>
-    </table>
+          <div class="col-3">
+            {{ bug.creator.name }}
+          </div>
+          <div class="col-3">
+            <span v-if="bug.closed" class="closed">
+              CLOSED
+            </span>
+            <span v-else class="open">OPEN</span>
+          </div>
+          <div class="col-3">
+            {{ new Date (bug.updatedAt).toLocaleString(en, time) }}
+          <!-- <button @click="deleteBug(bug.id)" class="btn custom-btn btn-danger delete">
+                Delete
+              </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -149,7 +148,27 @@ a {
   margin-bottom: 10px;
 }
 
-  tr:nth-child(even) {background: rgb(255, 253, 253)}
-  tr:nth-child(odd) {background: rgba(210, 210, 210, 0.399)}
+.color:nth-child(even) {background: rgb(255, 253, 253)}
+.color:nth-child(odd) {background: rgba(210, 210, 210, 0.399)}
+
+.closed {
+color: red;
+font-weight: 900;
+  }
+
+.open {
+    color: green;
+    font-weight: 900;
+  }
+
+.container-fluid {
+      background: white;
+}
+
+button {
+      padding-top: 12px;
+    background: black;
+    color: white;
+}
 
 </style>
